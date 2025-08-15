@@ -44,6 +44,9 @@
   --color-danger: #e53935;
   --color-tetriary: #82caff;
   --color-info: #00acc1;
+  --color-dark: #393939;
+  --shadow-all: 0 0 20px -2px rgba(0, 0, 0, 0.15);
+  --shadow-all-sm: 0 0 10px -4px rgba(0, 0, 0, 0.15);
 }
 
 :root {
