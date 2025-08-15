@@ -1,5 +1,3 @@
-"use client";
-
 import CalendarView from "@/components/CalendarView";
 import CourseCard from "@/components/CourseCard";
 import EventCard from "@/components/EventCard";

@@ -75,8 +75,14 @@ export function Sidebar({ className, onToggle }) {
     onToggle?.(!isOpen);
   };
 
-  const handleItemClick = (itemId) => {
-    setActiveItem(itemId);
+  const handleItemClick = (item) => {
+    if (!item.submenu) {
+      setActiveItem(item.id);
+    }
+  };
+
+  const handleSubItemClick = (submenuLabel) => {
+    setActiveItem(submenuLabel);
   };
 
   return (
@@ -144,7 +150,7 @@ export function Sidebar({ className, onToggle }) {
                   {/* Main Menu Item */}
                   <button
                     onClick={() => {
-                      handleItemClick(item.id);
+                      handleItemClick(item);
                       if (hasSubmenu && isOpen) {
                         toggleSubmenu(item.id);
                       }
@@ -190,31 +196,36 @@ export function Sidebar({ className, onToggle }) {
                       className={cn(
                         "ml-4 overflow-hidden transition-all ease-out",
                         isExpanded
-                          ? "max-h-96 opacity-100 mt-2 duration-1500"
-                          : "max-h-0 opacity-0 mt-0 duration-700"
+                          ? "max-h-96 opacity-100 mt-2 duration-2000"
+                          : "max-h-0 opacity-0 mt-0 duration-500"
                       )}
                     >
                       <div
                         className={cn(
                           "space-y-1 transition-all ease-out transform",
                           isExpanded
-                            ? "translate-y-0 opacity-100 duration-1000"
+                            ? "translate-y-0 opacity-100 duration-500"
                             : "-translate-y-2 opacity-0 duration-500"
                         )}
                       >
                         {item.submenu?.map((subItem, index) => (
                           <button
+                            onClick={() => {
+                              handleSubItemClick(subItem.label);
+                            }}
                             key={index}
                             className={cn(
                               "w-full text-left px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/5 rounded-md",
                               "transition-all ease-out transform",
+                              activeItem == subItem.label &&
+                                "bg-white text-primary hover:text-primary hover:bg-white",
                               isExpanded
                                 ? "translate-x-0 opacity-100 duration-500"
                                 : "-translate-x-4 opacity-0 duration-300"
                             )}
                             style={{
                               transitionDelay: isExpanded
-                                ? `${index * 200}ms`
+                                ? `${index * 50}ms`
                                 : "0ms",
                             }}
                           >
