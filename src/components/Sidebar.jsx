@@ -11,6 +11,7 @@ import {
   ChevronDown,
   ChevronRight,
 } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 
@@ -59,8 +60,10 @@ const menuItems = [
 
 export function Sidebar({ className, onToggle }) {
   const [isOpen, setIsOpen] = useState(true);
-  const [activeItem, setActiveItem] = useState("home");
   const [expandedMenus, setExpandedMenus] = useState([]);
+
+  const router = useRouter();
+  const pathname = usePathname();
 
   const toggleSubmenu = (itemId) => {
     setExpandedMenus((prev) =>
@@ -77,12 +80,12 @@ export function Sidebar({ className, onToggle }) {
 
   const handleItemClick = (item) => {
     if (!item.submenu) {
-      setActiveItem(item.id);
+      router.push(item.href);
     }
   };
 
-  const handleSubItemClick = (submenuLabel) => {
-    setActiveItem(submenuLabel);
+  const handleSubItemClick = (submenu) => {
+    router.push(submenu.href);
   };
 
   return (
@@ -138,7 +141,7 @@ export function Sidebar({ className, onToggle }) {
           >
             {menuItems.map((item) => {
               const Icon = item.icon;
-              const isActive = activeItem === item.id;
+              const isActive = pathname === item.href;
               const hasSubmenu = item.submenu && item.submenu.length > 0;
               const isExpanded = expandedMenus.includes(item.id);
 
@@ -211,13 +214,13 @@ export function Sidebar({ className, onToggle }) {
                         {item.submenu?.map((subItem, index) => (
                           <button
                             onClick={() => {
-                              handleSubItemClick(subItem.label);
+                              handleSubItemClick(subItem);
                             }}
                             key={index}
                             className={cn(
                               "w-full text-left px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/5 rounded-md",
                               "transition-all ease-out transform",
-                              activeItem == subItem.label &&
+                              pathname == subItem.href &&
                                 "bg-white text-primary hover:text-primary hover:bg-white",
                               isExpanded
                                 ? "translate-x-0 opacity-100 duration-500"
