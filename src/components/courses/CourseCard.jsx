@@ -1,18 +1,29 @@
 import Image from "next/image";
 
+import { cn } from "@/lib/utils";
 import { Progress } from "@/components/ui/progress";
 
-const CourseCard = () => {
+const CourseCard = ({ isExpanded = true }) => {
   return (
-    <div className="w-full bg-gradient-to-r from-tetriary to-white rounded-[25px] py-6 px-6 shadow-all flex gap-6">
+    <div
+      className={cn(
+        " from-tetriary to-white rounded-[25px] py-3 px-3 shadow-all flex gap-6 items-center transition-all duration-300 ease-in-out",
+        isExpanded
+          ? "w-full bg-gradient-to-r"
+          : "lg:max-w-[17rem] bg-gradient-to-b flex-col gap-2"
+      )}
+    >
       <Image
         src="/images/js.jpg"
         alt="image"
         width={150}
         height={150}
-        className="w-[223px] h-[152px] object-cover object-center shadow-all rounded-lg"
+        className={cn(
+          "h-[152px] object-cover object-center shadow-all rounded-lg",
+          isExpanded ? "w-[223px]" : "w-full"
+        )}
       />
-      <div className="flex flex-col justify-between pb-5 w-full">
+      <div className="flex flex-col justify-between w-full h-[10rem] pb-4 pt-1">
         <div>
           <span className="text-sm text-muted-foreground">Web Development</span>
 

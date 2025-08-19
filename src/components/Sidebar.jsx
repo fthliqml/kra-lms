@@ -160,7 +160,7 @@ export function Sidebar({ className, onToggle }) {
                     }}
                     className={cn(
                       "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-300",
-                      "text-white hover:bg-white/10",
+                      "text-white hover:bg-white/10 cursor-pointer",
                       isActive && "bg-white text-primary hover:bg-white",
                       item.id === "home" && "rounded-tr-[50px]",
                       !isOpen && "justify-center px-2 py-2 rounded-full"
@@ -219,7 +219,7 @@ export function Sidebar({ className, onToggle }) {
                             key={index}
                             className={cn(
                               "w-full text-left px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/5 rounded-md",
-                              "transition-all ease-out transform",
+                              "transition-all ease-out transform cursor-pointer",
                               pathname == subItem.href &&
                                 "bg-white text-primary hover:text-primary hover:bg-white",
                               isExpanded

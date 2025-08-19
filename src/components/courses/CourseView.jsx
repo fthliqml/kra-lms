@@ -1,16 +1,19 @@
-import CourseCard from "@/components/CourseCard";
+"use client";
+
+import CourseList from "@/components/courses/CourseList";
 import FilterDropdown from "@/components/FilterDropdown";
 import SearchInput from "@/components/SearchInput";
-
 import { ViewToggle } from "@/components/ViewToggle";
+import { useState } from "react";
 
-export default function page() {
+export default function CourseView() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <>
-      <h1 className="text-primary text-4xl font-bold mb-10">Courses</h1>
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-5">
-          <ViewToggle />
+          <ViewToggle setIsExpanded={setIsExpanded} isExpanded={isExpanded} />
           <span className="text-primary">Showing 1-9 of 12 results</span>
         </div>
 
@@ -20,11 +23,7 @@ export default function page() {
         </div>
       </div>
 
-      <div className="mt-10 flex flex-col justify-center gap-4">
-        <CourseCard />
-        <CourseCard />
-        <CourseCard />
-      </div>
+      <CourseList isExpanded={isExpanded} />
     </>
   );
 }

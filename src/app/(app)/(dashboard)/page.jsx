@@ -1,5 +1,5 @@
 import CalendarView from "@/components/CalendarView";
-import CourseCard from "@/components/CourseCard";
+import CourseCard from "@/components/courses/CourseCard";
 import EventCard from "@/components/EventCard";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
