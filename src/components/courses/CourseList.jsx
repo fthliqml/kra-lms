@@ -14,6 +14,9 @@ export default function CourseList({ isExpanded }) {
       <CourseCard isExpanded={isExpanded} />
       <CourseCard isExpanded={isExpanded} />
       <CourseCard isExpanded={isExpanded} />
+      <CourseCard isExpanded={isExpanded} />
+      <CourseCard isExpanded={isExpanded} />
+      <CourseCard isExpanded={isExpanded} />
     </div>
   );
 }

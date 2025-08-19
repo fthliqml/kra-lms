@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -8,22 +9,27 @@ import {
 import { FilterIcon } from "lucide-react";
 
 const FilterDropdown = () => {
+  const [filter, setFilter] = useState("All");
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="text-primary rounded-full shadow-all cursor-pointer"
-          size={"xl"}
+          className="text-primary rounded-full shadow-all cursor-pointer gap-2"
+          size="xl"
         >
-          Filter
-          <FilterIcon />
+          {filter}
+          <FilterIcon className="size-4" />
         </Button>
       </DropdownMenuTrigger>
+
       <DropdownMenuContent>
-        <DropdownMenuItem>All</DropdownMenuItem>
-        <DropdownMenuItem>Active</DropdownMenuItem>
-        <DropdownMenuItem>Completed</DropdownMenuItem>
+        {["All", "Active", "Completed"].map((item) => (
+          <DropdownMenuItem key={item} onClick={() => setFilter(item)}>
+            {item}
+          </DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );

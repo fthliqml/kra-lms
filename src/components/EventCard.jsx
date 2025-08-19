@@ -9,7 +9,7 @@ export default function EventCard({ date, title, location, type }) {
   });
 
   return (
-    <div className="relative flex items-center rounded-xl shadow-md bg-white">
+    <div className="cursor-pointer relative flex items-center rounded-xl shadow-md bg-white transition-all hover:scale-[1.02] hover:shadow-xl hover:-translate-y-1">
       {/* Strip kecil di kiri */}
       <div
         className={cn(
