@@ -23,7 +23,7 @@ function RadioGroupItem({ className, ...props }) {
       className={cn(
         "aspect-square size-5 shrink-0 rounded-full border-2 border-[#3b5998] flex items-center justify-center transition-all",
         "focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3b5998]",
-        "disabled:cursor-not-allowed disabled:opacity-50",
+        "disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer",
         className
       )}
       {...props}
