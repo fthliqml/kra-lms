@@ -123,13 +123,13 @@ export function Sidebar({ className, onToggle }) {
           "bg-gradient-to-b from-primary to-secondary",
           isOpen
             ? "w-64 h-[85vh] top-[15vh]"
-            : "w-25 h-80 top-[15vh] rounded-br-[80px]"
+            : "w-25 h-80 top-[15vh] rounded-br-[60px] rounded-tr-[60px]"
         )}
       >
         <div
           className={cn(
             "flex flex-col h-full p-4 pr-[24px] pl-[21px]",
-            !isOpen && "pl-[10px]"
+            !isOpen && "pl-[10px] pr-[30px]"
           )}
         >
           {/* Navigation Items */}
@@ -168,7 +168,7 @@ export function Sidebar({ className, onToggle }) {
                   >
                     <Icon
                       className={cn(
-                        "w-5 h-5 flex-shrink-0 transition-colors duration-300",
+                        "w-5 h-5 lg:w-7 lg:h-7 flex-shrink-0 transition-colors duration-300",
                         isActive ? "text-primary" : "text-white"
                       )}
                     />
