@@ -119,7 +119,7 @@ export function Sidebar({ className, onToggle }) {
       {/* Sidebar */}
       <div
         className={cn(
-          "relative left-0 z-40 rounded-tr-[80px] transition-all duration-500 ease-in-out shrink-0",
+          "fixed left-0 z-40 rounded-tr-[80px] transition-all duration-500 ease-in-out",
           "bg-gradient-to-b from-primary to-secondary",
           isOpen
             ? "w-64 h-[85vh] top-[15vh]"
@@ -244,6 +244,14 @@ export function Sidebar({ className, onToggle }) {
           </nav>
         </div>
       </div>
+
+      {/* Spacer */}
+      <div
+        className={cn(
+          "transition-all duration-500 ease-in-out flex-shrink-0",
+          isOpen ? "w-64" : "w-16"
+        )}
+      />
     </div>
   );
 }
