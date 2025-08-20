@@ -9,7 +9,7 @@ export default function CourseTopBar() {
   const router = useRouter();
 
   return (
-    <div className="bg-primary text-white px-6 py-4 flex items-center justify-between shadow-lg fixed top-0 w-full">
+    <div className="bg-primary text-white px-6 py-4 flex items-center justify-between shadow-lg fixed top-0 w-full z-20">
       <div className="flex items-center space-x-4">
         <h1 className="text-lg font-semibold">
           Master JavaScript From Beginner to Advanced
