@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 export default function page() {
+  const isPassed = true;
   return (
     <div className="container mx-auto flex flex-col mt-30 h-full">
       <div className="max-w-md p-6">
@@ -33,20 +34,22 @@ export default function page() {
 
           <p>Status</p>
           <p>
-            <span className="mr-3">:</span>Tidak Lulus
+            <span className="mr-4">:</span>
+            {isPassed ? "Lulus" : "Tidak Lulus"}
           </p>
         </div>
       </div>
 
       <div className="max-w-4xl mt-20 p-6">
         <h3 className="text-lg font-bold">
-          Terimakasih telah menyelesaikan modul ini.
+          {isPassed
+            ? "🎉 Selamat! Anda telah lulus modul ini."
+            : "Terimakasih telah menyelesaikan modul ini."}
         </h3>
         <p className="text-lg mt-2">
-          Terima kasih atas partisipasi Anda dalam pembelajaran. Anda berhak
-          mendapatkan sertifikat sebagai bukti kelulusan. Jangan lupa untuk
-          mengunduh sertifikat Anda dan terus tingkatkan kompetensi Anda. Sampai
-          jumpa di modul selanjutnya!
+          {isPassed
+            ? "Terima kasih atas partisipasi Anda dalam pembelajaran. Anda berhak mendapatkan sertifikat sebagai bukti kelulusan. Jangan lupa untuk mengunduh sertifikat Anda dan terus tingkatkan kompetensi Anda. Sampai jumpa di modul selanjutnya!"
+            : "Saat ini Anda belum lulus. Silakan pelajari kembali materi yang tersedia dan coba kerjakan kembali post-test hingga Anda mencapai skor kelulusan. Semangat belajar, kami yakin Anda bisa!"}
         </p>
       </div>
 
