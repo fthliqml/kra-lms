@@ -3,9 +3,9 @@ import CourseTopBar from "@/components/courses/CourseTopBar";
 
 export default function LessonLayout({ children }) {
   return (
-    <div className="flex pb-10">
+    <div className="flex">
       <CourseSidebar />
-      <main className="flex-1 flex flex-col">
+      <main className="flex-1 flex flex-col min-h-screen">
         <CourseTopBar />
         {children}
       </main>

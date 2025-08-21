@@ -1,15 +1,18 @@
 "use client";
+
 import { useState, useRef, useEffect } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
+import { Button } from "@/components/ui/button";
+import { Slider } from "@/components/ui/slider";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
   import.meta.url
 ).toString();
 
-const PDFViewerClient = () => {
+const PDFViewerClient = ({ url }) => {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [scale, setScale] = useState(1.2);
@@ -194,28 +197,24 @@ const PDFViewerClient = () => {
       {/* Toolbar */}
       <div className="fixed top-16 left-30 right-0 z-20 bg-white shadow p-3 flex flex-wrap items-center gap-3">
         {/* Page Controls */}
-        <button
+        <Button
           onClick={goToPrevPage}
           disabled={pageNumber <= 1}
           className={`px-3 py-1 rounded text-white text-sm ${
-            pageNumber <= 1
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700"
+            pageNumber <= 1 && "bg-gray-400 cursor-not-allowed"
           }`}
         >
           Prev
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={goToNextPage}
           disabled={pageNumber >= numPages}
           className={`px-3 py-1 rounded text-white text-sm ${
-            pageNumber >= numPages
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700"
+            pageNumber >= numPages && "bg-gray-400 cursor-not-allowed"
           }`}
         >
           Next
-        </button>
+        </Button>
         <input
           type="number"
           value={pageNumber}
@@ -236,12 +235,12 @@ const PDFViewerClient = () => {
           >
             -
           </button>
-          <input
-            type="range"
-            min="50"
-            max="300"
-            value={scale * 100}
-            onChange={(e) => setScale(e.target.value / 100)}
+          <Slider
+            min={50}
+            max={300}
+            step={10}
+            value={[scale * 100]}
+            onValueChange={(value) => setScale(value[0] / 100)}
             className="w-32"
           />
           <button
@@ -305,7 +304,7 @@ const PDFViewerClient = () => {
           }}
         >
           <Document
-            file="/example.pdf"
+            file={url}
             onLoadSuccess={onDocumentLoadSuccess}
             loading={
               <div

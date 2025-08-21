@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, Logs, X } from "lucide-react";
 
 import { cn, getLastPathSegment } from "@/lib/utils";
@@ -13,16 +13,24 @@ import { Label } from "@/components/ui/label";
 
 export default function CourseSidebar() {
   const [isOpen, setIsOpen] = useState(true);
+  const [modules, setModules] = useState([
+    { href: "pre-test", label: "Pretest", done: false },
+    {
+      href: "document",
+      label: "Learning Module",
+      done: false,
+      submenu: [
+        { href: "document", label: "Document", done: false },
+
+        { href: "video", label: "Video", done: false },
+      ],
+    },
+    { href: "post-test", label: "Post test", done: false },
+    { href: "result", label: "Result", done: false },
+  ]);
+
   const router = useRouter();
   const pathname = usePathname();
-  const lastSegment = getLastPathSegment(pathname);
-
-  const modules = [
-    { href: "pre-test", label: "Pretest" },
-    { href: "learning-module", label: "Learning Module" },
-    { href: "post-test", label: "Post test" },
-    { href: "result", label: "Result" },
-  ];
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -85,29 +93,67 @@ export default function CourseSidebar() {
               </div>
 
               {/* Course Modules */}
-              <RadioGroup value={lastSegment}>
+              <RadioGroup className="space-y-2">
                 {modules.map((module) => (
-                  <Link
-                    href={module.href}
+                  <div
                     key={module.href}
-                    className="flex items-center space-x-3 py-2 border-b border-gray-600"
+                    className="flex flex-col border-b border-gray-200"
                   >
-                    <Label
-                      htmlFor={module.href}
-                      className={cn(
-                        "text-gray-700 font-medium cursor-pointer flex-1",
-                        module.href == lastSegment &&
-                          "text-primary font-semibold translate-x-2"
-                      )}
-                    >
-                      {module.label}
-                    </Label>
-                    <RadioGroupItem
-                      value={module.href}
-                      id={module.href}
-                      className="border-gray-300"
-                    />
-                  </Link>
+                    {/* Parent Module */}
+                    <div className="flex items-center justify-between py-2">
+                      <Link href={module.href} className="flex-1">
+                        <Label
+                          htmlFor={module.href}
+                          className={cn(
+                            "text-gray-700 font-medium cursor-pointer",
+                            module.done &&
+                              "text-primary font-semibold translate-x-2"
+                          )}
+                        >
+                          {module.label}
+                        </Label>
+                      </Link>
+
+                      <RadioGroupItem
+                        id={module.href}
+                        value={module.href}
+                        checked={module.done}
+                        readOnly
+                        className="border-gray-300"
+                      />
+                    </div>
+
+                    {module.submenu && (
+                      <div className="pl-4 space-y-2">
+                        {module.submenu.map((sub) => (
+                          <div
+                            key={sub.href}
+                            className="flex items-center justify-between border-b border-gray-200 py-2"
+                          >
+                            <Link href={sub.href} className="flex-1">
+                              <Label
+                                htmlFor={sub.href}
+                                className={cn(
+                                  "text-gray-600 cursor-pointer",
+                                  sub.done &&
+                                    "text-primary font-semibold translate-x-2"
+                                )}
+                              >
+                                {sub.label}
+                              </Label>
+                            </Link>
+                            <RadioGroupItem
+                              id={sub.href}
+                              value={sub.href}
+                              checked={sub.done}
+                              readOnly
+                              className="border-gray-300"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
               </RadioGroup>
             </div>
@@ -118,7 +164,7 @@ export default function CourseSidebar() {
               onClick={() => router.push("/courses")}
             >
               <ArrowLeft />
-              Kembali
+              Halaman Utama
             </Button>
           </div>
         </div>

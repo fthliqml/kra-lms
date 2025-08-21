@@ -24,7 +24,7 @@ export default function CourseTopBar() {
         }}
       >
         <ArrowLeft className="size-5" />
-        Kembali
+        Halaman Utama
       </Button>
     </div>
   );

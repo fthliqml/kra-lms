@@ -15,8 +15,8 @@ const PDFViewerClient = dynamic(() => import("./PDFViewerClient"), {
   ),
 });
 
-const PDFViewer = () => {
-  return <PDFViewerClient />;
+const PDFViewer = ({ url }) => {
+  return <PDFViewerClient url={url} />;
 };
 
 export default PDFViewer;

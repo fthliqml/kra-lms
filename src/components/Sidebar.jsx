@@ -64,6 +64,7 @@ export function Sidebar({ className, onToggle }) {
 
   const router = useRouter();
   const pathname = usePathname();
+  const firstSegment = "/" + (pathname.split("/")[1] || "");
 
   const toggleSubmenu = (itemId) => {
     setExpandedMenus((prev) =>
@@ -141,7 +142,8 @@ export function Sidebar({ className, onToggle }) {
           >
             {menuItems.map((item) => {
               const Icon = item.icon;
-              const isActive = pathname === item.href;
+              const isActive = firstSegment === item.href;
+              console.log(firstSegment);
               const hasSubmenu = item.submenu && item.submenu.length > 0;
               const isExpanded = expandedMenus.includes(item.id);
 
