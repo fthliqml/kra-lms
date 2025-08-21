@@ -1,4 +1,4 @@
-import YoutubePlayer from "@/components/courses/YoutubePlayer";
+import YoutubePlayer from "@/components/YoutubePlayer";
 
 export default function page() {
   return (

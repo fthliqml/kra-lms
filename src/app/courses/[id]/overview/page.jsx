@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { Sidebar } from "@/components/Sidebar";
 import { useRouter } from "next/navigation";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sidebar } from "@/components/Sidebar";
 
 export default function CourseOverviewPage() {
   const router = useRouter();
@@ -62,6 +62,7 @@ export default function CourseOverviewPage() {
               <Button
                 className="w-full mt-4 rounded-full"
                 onClick={() => router.replace("/courses/1/pre-test")}
+                variant={"primary"}
               >
                 Start Course <ArrowRight />
               </Button>

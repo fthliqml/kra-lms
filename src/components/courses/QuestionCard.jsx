@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 
 const QuestionCard = ({ number, question, type = "essay", options = [] }) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(0);
   return (
     <div className="mb-8">
       <h2 className="text-xl font-semibold text-black mb-6">
@@ -30,9 +30,10 @@ const QuestionCard = ({ number, question, type = "essay", options = [] }) => {
             <div
               key={i}
               className={cn(
-                "flex items-center space-x-3 border-2 p-2 rounded-md border-gray-300",
+                "flex items-center space-x-3 border-2 p-2 rounded-md border-gray-300 cursor-pointer",
                 value == i + 1 && "border-primary"
               )}
+              onClick={() => setValue(i + 1)}
             >
               <RadioGroupItem value={i + 1} id={opt} />
               <Label htmlFor={opt} className="text-gray-700 cursor-pointer">

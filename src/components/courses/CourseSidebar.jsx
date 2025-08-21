@@ -8,13 +8,17 @@ import { ArrowLeft, Logs, X } from "lucide-react";
 import { cn, getLastPathSegment } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  ProgressRadioItem,
+  RadioGroup,
+  RadioGroupItem,
+} from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
 export default function CourseSidebar() {
   const [isOpen, setIsOpen] = useState(true);
   const [modules, setModules] = useState([
-    { href: "pre-test", label: "Pretest", done: false },
+    { href: "pre-test", label: "Pretest", done: true },
     {
       href: "document",
       label: "Learning Module",
@@ -114,7 +118,7 @@ export default function CourseSidebar() {
                         </Label>
                       </Link>
 
-                      <RadioGroupItem
+                      <ProgressRadioItem
                         id={module.href}
                         value={module.href}
                         checked={module.done}
@@ -142,7 +146,7 @@ export default function CourseSidebar() {
                                 {sub.label}
                               </Label>
                             </Link>
-                            <RadioGroupItem
+                            <ProgressRadioItem
                               id={sub.href}
                               value={sub.href}
                               checked={sub.done}
