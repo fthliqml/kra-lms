@@ -1,20 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Home,
-  BookText,
-  History,
-  FileText,
-  Goal,
-  Menu,
-  ChevronDown,
-  ChevronRight,
-} from "lucide-react";
+import { Home, BookText, History, FileText, Goal, Menu } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-
 import { cn } from "@/lib/utils";
+
 import { useSidebar } from "@/context/SidebarContext";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import SidebarMainMenu from "@/components/SidebarMainMenu";
 
 const menuItems = [
   {
@@ -60,7 +57,7 @@ const menuItems = [
 ];
 
 export function Sidebar({ className, onToggle }) {
-  const { isOpen, toggleSidebar } = useSidebar();
+  const { isOpen, setIsOpen, toggleSidebar } = useSidebar();
   const [expandedMenus, setExpandedMenus] = useState([]);
 
   const router = useRouter();
@@ -152,48 +149,40 @@ export function Sidebar({ className, onToggle }) {
                   key={item.id}
                   className="transition-all duration-1000 ease-out"
                 >
-                  {/* Main Menu Item */}
-                  <button
-                    onClick={() => {
-                      handleItemClick(item);
-                      if (hasSubmenu && isOpen) {
-                        toggleSubmenu(item.id);
-                      }
-                    }}
-                    className={cn(
-                      "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-300",
-                      "text-white hover:bg-white/10 cursor-pointer",
-                      isActive && "bg-white text-primary hover:bg-white",
-                      item.id === "home" && "rounded-tr-[50px]",
-                      !isOpen && "justify-center px-2 py-2 rounded-full"
-                    )}
-                  >
-                    <Icon
-                      className={cn(
-                        "w-5 h-5 lg:w-7 lg:h-7 flex-shrink-0 transition-colors duration-300",
-                        isActive ? "text-primary" : "text-white"
-                      )}
+                  {isOpen ? (
+                    <SidebarMainMenu
+                      item={item}
+                      isOpen={isOpen}
+                      setIsOpen={setIsOpen}
+                      isActive={isActive}
+                      isExpanded={isExpanded}
+                      hasSubmenu={hasSubmenu}
+                      handleItemClick={handleItemClick}
+                      toggleSubmenu={toggleSubmenu}
+                      Icon={Icon}
                     />
-                    <div
-                      className={cn(
-                        "flex items-center justify-between flex-1 transition-all duration-300 overflow-hidden whitespace-nowrap",
-                        isOpen
-                          ? "opacity-100 max-w-full ml-0"
-                          : "opacity-0 max-w-0 -ml-3"
-                      )}
-                    >
-                      <span className="font-medium">{item.label}</span>
-                      {hasSubmenu && (
-                        <div className="transition-transform duration-500 ease-out">
-                          {isExpanded ? (
-                            <ChevronDown className="w-4 h-4" />
-                          ) : (
-                            <ChevronRight className="w-4 h-4" />
-                          )}
+                  ) : (
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div>
+                          <SidebarMainMenu
+                            item={item}
+                            isOpen={isOpen}
+                            setIsOpen={setIsOpen}
+                            isActive={isActive}
+                            isExpanded={isExpanded}
+                            hasSubmenu={hasSubmenu}
+                            handleItemClick={handleItemClick}
+                            toggleSubmenu={toggleSubmenu}
+                            Icon={Icon}
+                          />
                         </div>
-                      )}
-                    </div>
-                  </button>
+                      </TooltipTrigger>
+                      <TooltipContent side="right">
+                        <p>{item.label}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  )}
 
                   {/* Submenu */}
                   {hasSubmenu && isOpen && (
@@ -246,14 +235,6 @@ export function Sidebar({ className, onToggle }) {
           </nav>
         </div>
       </div>
-
-      {/* Spacer
-      <div
-        className={cn(
-          "transition-all duration-500 ease-in-out flex-shrink-0",
-          isOpen ? "w-64" : "w-16"
-        )}
-      /> */}
     </div>
   );
 }
