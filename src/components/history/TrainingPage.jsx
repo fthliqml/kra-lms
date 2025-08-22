@@ -3,16 +3,38 @@
 import FilterDropdown from "@/components/FilterDropdown";
 import { MyPagination } from "@/components/MyPagination";
 import SearchInput from "@/components/SearchInput";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { useSidebar } from "@/context/SidebarContext";
 import { cn } from "@/lib/utils";
+import { DataTable } from "@/components/DataTable";
+import Link from "next/link";
+
+const columns = [
+  {
+    key: "no",
+    header: "No.",
+    className: "text-center",
+    cellClassName: "text-center",
+  },
+  { key: "trainingName", header: "Training", className: "w-[200px]" },
+  { key: "groupComp", header: "Group Comp" },
+  { key: "date", header: "Date" },
+  { key: "instructor", header: "Instructor", className: "w-[200px]" },
+  {
+    key: "status",
+    header: "Status",
+    className: "text-center",
+    cellClassName: "text-center",
+  },
+  {
+    key: "certificate",
+    header: "Certificate",
+    render: (value) => (
+      <Link href={"#"} className="underline text-blue-800 cursor-pointer">
+        {value}
+      </Link>
+    ),
+  },
+];
 
 export default function TrainingPage({ histories }) {
   const { isOpen } = useSidebar();
@@ -27,49 +49,13 @@ export default function TrainingPage({ histories }) {
       <div className="w-full flex justify-between items-center mb-15">
         <h1 className="text-primary text-4xl font-bold">Training History</h1>
         <div className="flex gap-2">
-          <FilterDropdown />
+          <FilterDropdown content={["All", "Inhouse", "Outhouse", "K-Learn"]} />
           <SearchInput />
         </div>
       </div>
 
       <div className="rounded-lg border border-gray-200 shadow-all p-3">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className={"text-center"}>No.</TableHead>
-              <TableHead className="w-[200px]">Training</TableHead>
-              <TableHead>Group Comp</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead className="w-[200px]">Instructor</TableHead>
-              <TableHead className={"text-center"}>Status</TableHead>
-              <TableHead>Certificate</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {histories.map((history) => (
-              <TableRow
-                key={history.no}
-                className={
-                  "odd:bg-[#EDEDED] odd:hover:bg-[#EDEDED] even:bg-white"
-                }
-              >
-                <TableCell className="font-medium text-center">
-                  {history.no}
-                </TableCell>
-                <TableCell>{history.trainingName}</TableCell>
-                <TableCell>{history.groupComp}</TableCell>
-                <TableCell>{history.date}</TableCell>
-                <TableCell>{history.instructor}</TableCell>
-                <TableCell className={"text-center"}>
-                  {history.status}
-                </TableCell>
-                <TableCell className={"underline text-blue-800 cursor-pointer"}>
-                  {history.certificate}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <DataTable columns={columns} rows={histories} />
       </div>
 
       <div className="flex items-center justify-between w-full mt-5">

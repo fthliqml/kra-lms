@@ -45,6 +45,9 @@ function PaginationLink({ className, isActive, size = "icon", ...props }) {
           variant: isActive ? "outline" : "ghost",
           size,
         }),
+        isActive
+          ? "bg-gradient-to-b from-[#4863A0] to-tetriary text-white hover:text-white"
+          : "hover:border border-primary",
         className
       )}
       {...props}
@@ -57,7 +60,10 @@ function PaginationPrevious({ className, ...props }) {
     <PaginationLink
       aria-label="Go to previous page"
       size="default"
-      className={cn("gap-1 px-2.5 sm:pl-2.5", className)}
+      className={cn(
+        "gap-1 px-2.5 sm:pl-2.5 text-primary hover:text-primary hover:border-none",
+        className
+      )}
       {...props}
     >
       <ChevronLeftIcon />
@@ -71,7 +77,10 @@ function PaginationNext({ className, ...props }) {
     <PaginationLink
       aria-label="Go to next page"
       size="default"
-      className={cn("gap-1 px-2.5 sm:pr-2.5", className)}
+      className={cn(
+        "gap-1 px-2.5 sm:pr-2.5 text-primary hover:text-primary hover:border-none",
+        className
+      )}
       {...props}
     >
       <span className="hidden sm:block">Next</span>

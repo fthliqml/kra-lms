@@ -29,7 +29,7 @@ export default function CourseContent() {
 
         <div className="flex  gap-3 items-center">
           <SearchInput className={"rounded-full"} />
-          <FilterDropdown />
+          <FilterDropdown content={["All", "Active", "Completed"]} />
         </div>
       </div>
 

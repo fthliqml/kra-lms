@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { FilterIcon } from "lucide-react";
 
-const FilterDropdown = () => {
+const FilterDropdown = ({ content = [] }) => {
   const [filter, setFilter] = useState("All");
 
   return (
@@ -27,7 +27,7 @@ const FilterDropdown = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
-        {["All", "Active", "Completed"].map((item) => (
+        {content.map((item) => (
           <DropdownMenuItem key={item} onClick={() => setFilter(item)}>
             {item}
           </DropdownMenuItem>
