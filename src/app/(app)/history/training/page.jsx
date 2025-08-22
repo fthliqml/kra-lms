@@ -1,0 +1,98 @@
+import TrainingPage from "@/components/history/TrainingPage";
+
+const histories = [
+  {
+    no: 1,
+    trainingName: "Training A",
+    groupComp: "BC",
+    date: "06-08 May 2025",
+    instructor: "Yuda Prana Wijaya Putra",
+    status: "Lulus",
+    certificate: "BC/I/C/2025/178",
+  },
+  {
+    no: 2,
+    trainingName: "Training Z",
+    groupComp: "MMP",
+    date: "03-07 Mar 2025",
+    instructor: "Sugeng Ariadi",
+    status: "Lulus",
+    certificate: "MMP/I/C/2025/111",
+  },
+  {
+    no: 3,
+    trainingName: "Training V",
+    groupComp: "BC",
+    date: "15-16 Jan 2025",
+    instructor: "Yuda Prana Wijaya Putra",
+    status: "Lulus",
+    certificate: "BC/I/C/2025/6",
+  },
+  {
+    no: 4,
+    trainingName: "Training R",
+    groupComp: "TOC",
+    date: "03-05 Jul 2024",
+    instructor: "Endro Santoso",
+    status: "Lulus",
+    certificate: "TOC/I/C/2024/507",
+  },
+  {
+    no: 5,
+    trainingName: "Training F",
+    groupComp: "BC",
+    date: "22 Apr 2024",
+    instructor: "Sugeng Ariadi",
+    status: "Lulus",
+    certificate: "BC/I/C/2024/290",
+  },
+  {
+    no: 6,
+    trainingName: "Training G",
+    groupComp: "MMP",
+    date: "19-23 Feb 2024",
+    instructor: "Sugeng Ariadi",
+    status: "Lulus",
+    certificate: "MMP/I/C/2024/72",
+  },
+  {
+    no: 7,
+    trainingName: "Training U",
+    groupComp: "BMC",
+    date: "18-19 Sep 2023",
+    instructor: "Rovi Julianda",
+    status: "Lulus",
+    certificate: "BMC/I/C/2023/471",
+  },
+  {
+    no: 8,
+    trainingName: "Training W",
+    groupComp: "MMP",
+    date: "14-18 Aug 2023",
+    instructor: "Sugeng Ariadi",
+    status: "Lulus",
+    certificate: "MMP/I/C/2023/419",
+  },
+  {
+    no: 9,
+    trainingName: "Training O",
+    groupComp: "MDP",
+    date: "13-15 Jun 2023",
+    instructor: "Sugeng Ariadi",
+    status: "Lulus",
+    certificate: "MDP/I/C/2023/230",
+  },
+  {
+    no: 10,
+    trainingName: "Training P",
+    groupComp: "BC",
+    date: "03-04 Feb 2022",
+    instructor: "Sugeng Ariadi",
+    status: "Lulus",
+    certificate: "BC/C/2022/0071",
+  },
+];
+
+export default function Page() {
+  return <TrainingPage histories={histories} />;
+}

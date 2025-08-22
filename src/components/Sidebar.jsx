@@ -14,6 +14,7 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
+import { useSidebar } from "@/context/SidebarContext";
 
 const menuItems = [
   {
@@ -34,7 +35,7 @@ const menuItems = [
     icon: History,
     href: "/history",
     submenu: [
-      { label: "Recent Activity", href: "/history/recent" },
+      { label: "Training History", href: "/history/training" },
       { label: "All History", href: "/history/all" },
       { label: "Archived", href: "/history/archived" },
     ],
@@ -59,7 +60,7 @@ const menuItems = [
 ];
 
 export function Sidebar({ className, onToggle }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const { isOpen, toggleSidebar } = useSidebar();
   const [expandedMenus, setExpandedMenus] = useState([]);
 
   const router = useRouter();
@@ -75,7 +76,7 @@ export function Sidebar({ className, onToggle }) {
   };
 
   const handleToggle = () => {
-    setIsOpen(!isOpen);
+    toggleSidebar();
     onToggle?.(!isOpen);
   };
 
@@ -246,13 +247,13 @@ export function Sidebar({ className, onToggle }) {
         </div>
       </div>
 
-      {/* Spacer */}
+      {/* Spacer
       <div
         className={cn(
           "transition-all duration-500 ease-in-out flex-shrink-0",
           isOpen ? "w-64" : "w-16"
         )}
-      />
+      /> */}
     </div>
   );
 }

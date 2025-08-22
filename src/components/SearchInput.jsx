@@ -1,7 +1,8 @@
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
-const SearchInput = () => {
+const SearchInput = ({ className }) => {
   return (
     <div className="relative w-[250px] h-10">
       {/* Icon */}
@@ -9,7 +10,10 @@ const SearchInput = () => {
 
       {/* Input */}
       <Input
-        className="pl-10 shadow-[inset_0_4px_6px_rgba(0,0,0,0.15)] bg-[#E6F4FF] rounded-full h-10"
+        className={cn(
+          "pl-10 shadow-[inset_0_4px_6px_rgba(0,0,0,0.15)] bg-[#E6F4FF] h-10",
+          className
+        )}
         type="text"
         placeholder="Search"
       />

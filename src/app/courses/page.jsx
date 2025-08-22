@@ -1,14 +1,14 @@
-import CourseView from "@/components/courses/CourseView";
+import CourseContent from "@/components/courses/CourseContent";
 import { Sidebar } from "@/components/Sidebar";
+import { SidebarProvider } from "@/context/SidebarContext";
 
 export default function page() {
   return (
     <main className="flex">
-      <Sidebar />
-      <div className="flex-1 pt-10 pb-5 px-17">
-        <h1 className="text-primary text-4xl font-bold mb-10">Courses</h1>
-        <CourseView />
-      </div>
+      <SidebarProvider>
+        <Sidebar />
+        <CourseContent />
+      </SidebarProvider>
     </main>
   );
 }
