@@ -14,7 +14,7 @@ export default function OverviewContent() {
   return (
     <div
       className={cn(
-        "flex-1 pt-10 pb-5 px-17 pr-15 transition-all duration-500 ease-in-out",
+        "flex-1 pt-10 pb-5 transition-all duration-500 ease-in-out",
         isOpen ? "pl-72" : "pl-36"
       )}
     >
