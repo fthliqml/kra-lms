@@ -15,8 +15,8 @@ export default function CourseContent() {
   return (
     <div
       className={cn(
-        "flex-1 pt-9 pb-5 transition-all duration-500 ease-in-out",
-        isOpen ? "pl-72" : "pl-36"
+        "flex-1 pb-5 transition-all duration-500 ease-in-out",
+        isOpen ? "pl-72" : "pl-32"
       )}
     >
       <h1 className="text-primary text-4xl font-bold mb-10">Courses</h1>

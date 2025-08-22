@@ -33,8 +33,7 @@ const menuItems = [
     href: "/history",
     submenu: [
       { label: "Training History", href: "/history/training" },
-      { label: "All History", href: "/history/all" },
-      { label: "Archived", href: "/history/archived" },
+      { label: "Certification History", href: "/history/certification" },
     ],
   },
   {
@@ -122,7 +121,7 @@ export function Sidebar({ className, onToggle }) {
           "bg-gradient-to-b from-primary to-secondary",
           isOpen
             ? "w-64 h-[85vh] top-[15vh]"
-            : "w-25 h-80 top-[15vh] rounded-br-[60px] rounded-tr-[60px]"
+            : "w-23 h-80 top-[15vh] rounded-br-[60px] rounded-tr-[60px]"
         )}
       >
         <div
@@ -140,7 +139,7 @@ export function Sidebar({ className, onToggle }) {
           >
             {menuItems.map((item) => {
               const Icon = item.icon;
-              const isActive = firstSegment === item.href;
+              const isActive = !item.submenu && firstSegment === item.href;
               const hasSubmenu = item.submenu && item.submenu.length > 0;
               const isExpanded = expandedMenus.includes(item.id);
 

@@ -14,7 +14,7 @@ export default function DashboardContent() {
     <div
       className={cn(
         "flex gap-15 transition-all duration-500 ease-in-out w-full",
-        isOpen ? "pl-72" : "pl-36"
+        isOpen ? "pl-72" : "pl-32"
       )}
     >
       <div className="flex flex-col gap-20 flex-[1.5]">

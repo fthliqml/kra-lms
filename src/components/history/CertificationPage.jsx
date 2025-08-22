@@ -1,26 +1,21 @@
 "use client";
 
-import FilterDropdown from "@/components/FilterDropdown";
-import { MyPagination } from "@/components/MyPagination";
-import SearchInput from "@/components/SearchInput";
 import { useSidebar } from "@/context/SidebarContext";
-import { cn } from "@/lib/utils";
+import SearchInput from "@/components/SearchInput";
 import { DataTable } from "@/components/DataTable";
-import Link from "next/link";
+import { MyPagination } from "@/components/MyPagination";
+import { cn } from "@/lib/utils";
 
 const columns = [
   {
     key: "no",
     header: "No.",
-    className: "text-center font-semibold",
+    className: "text-center font-semibold w-[100px]",
     cellClassName: "text-center font-semibold",
   },
-  { key: "trainingName", header: "Training", className: "w-[200px]" },
   {
-    key: "groupComp",
-    header: "Group Comp",
-    className: "text-center",
-    cellClassName: "text-center",
+    key: "competency",
+    header: "Competency",
   },
   {
     key: "date",
@@ -29,28 +24,14 @@ const columns = [
     cellClassName: "text-center",
   },
   {
-    key: "instructor",
-    header: "Instructor",
-    className: "w-[200px] text-center",
-  },
-  {
     key: "status",
     header: "Status",
     className: "text-center",
     cellClassName: "text-center",
   },
-  {
-    key: "certificate",
-    header: "Certificate",
-    render: (value) => (
-      <Link href={"#"} className="underline text-blue-800 cursor-pointer">
-        {value}
-      </Link>
-    ),
-  },
 ];
 
-export default function TrainingPage({ histories }) {
+export default function CertificationPage({ certifications }) {
   const { isOpen } = useSidebar();
 
   return (
@@ -61,15 +42,16 @@ export default function TrainingPage({ histories }) {
       )}
     >
       <div className="w-full flex justify-between items-center mb-15">
-        <h1 className="text-primary text-4xl font-bold">Training History</h1>
+        <h1 className="text-primary text-4xl font-bold">
+          Certification History
+        </h1>
         <div className="flex gap-2">
-          <FilterDropdown content={["All", "Inhouse", "Outhouse", "K-Learn"]} />
           <SearchInput />
         </div>
       </div>
 
       <div className="rounded-lg border border-gray-200 shadow-all p-2">
-        <DataTable columns={columns} rows={histories} />
+        <DataTable columns={columns} rows={certifications} />
       </div>
 
       <div className="flex items-center justify-between w-full mt-5">

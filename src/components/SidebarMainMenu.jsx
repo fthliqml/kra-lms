@@ -33,8 +33,9 @@ export default function SidebarMainMenu({
     >
       <Icon
         className={cn(
-          "w-5 h-5 lg:w-7 lg:h-7 flex-shrink-0 transition-colors duration-300",
-          isActive ? "text-primary" : "text-white"
+          "w-5 h-5 flex-shrink-0 transition-colors duration-300",
+          isActive ? "text-primary" : "text-white",
+          isOpen ? "lg:w-6 lg:h-6" : "sm:w-6 sm:h-6"
         )}
       />
 
