@@ -18,8 +18,9 @@ const CourseCard = ({ isExpanded = true }) => {
         alt="Course cover"
         width={223}
         height={152}
+        priority
         className={cn(
-          "object-cover object-center shadow-all rounded-lg transition duration-300",
+          "object-cover object-center shadow-all rounded-lg transition duration-300 w-auto h-auto",
           isExpanded ? "w-[223px] h-[152px]" : "w-full h-[152px]",
           "hover:brightness-105"
         )}

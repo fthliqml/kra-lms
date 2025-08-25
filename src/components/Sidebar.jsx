@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Home, BookText, History, FileText, Goal, Menu } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -59,6 +59,26 @@ export function Sidebar({ className, onToggle }) {
   const { isOpen, setIsOpen, toggleSidebar } = useSidebar();
   const [expandedMenus, setExpandedMenus] = useState([]);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+
+    const handleScrollLock = () => {
+      if (isOpen && mediaQuery.matches) {
+        document.body.classList.add("overflow-hidden");
+      } else {
+        document.body.classList.remove("overflow-hidden");
+      }
+    };
+
+    handleScrollLock();
+    mediaQuery.addEventListener("change", handleScrollLock);
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+      mediaQuery.removeEventListener("change", handleScrollLock);
+    };
+  }, [isOpen]);
+
   const router = useRouter();
   const pathname = usePathname();
   const firstSegment = "/" + (pathname.split("/")[1] || "");
@@ -88,11 +108,14 @@ export function Sidebar({ className, onToggle }) {
 
   return (
     <div className={cn("relative flex", className)}>
-      <div className="fixed top-4 left-4 z-50 flex items-center gap-7">
+      <div className="fixed top-10 left-6 z-50 flex items-center gap-4">
         {/* Menu Toggle Button */}
         <button
           onClick={handleToggle}
-          className="p-2 rounded-lg bg-white shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 cursor-pointer"
+          className={cn(
+            "p-2 rounded-lg bg-white shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 cursor-pointer opacity-60 hover:opacity-100 md:opacity-100",
+            isOpen && "opacity-100"
+          )}
         >
           <Menu className="w-5 h-5 text-primary" />
         </button>
@@ -100,8 +123,10 @@ export function Sidebar({ className, onToggle }) {
         {/* K-LEARN Logo */}
         <h1
           className={cn(
-            "text-4xl font-bold transform transition-all duration-500",
-            isOpen ? "translate-x-0 opacity-100" : "-translate-x-10 opacity-0"
+            "text-4xl font-bold transform transition-all duration-500 hidden md:block",
+            isOpen
+              ? "translate-x-0 opacity-100 pointer-events-auto"
+              : "-translate-x-10 opacity-0 pointer-events-none"
           )}
         >
           <span className="bg-gradient-to-r from-primary to-primary text-transparent bg-clip-text">
@@ -117,11 +142,11 @@ export function Sidebar({ className, onToggle }) {
       {/* Sidebar */}
       <div
         className={cn(
-          "fixed left-0 z-40 rounded-tr-[80px] transition-all duration-500 ease-in-out",
+          "fixed left-0 z-50 rounded-tr-[80px] transition-all duration-500 ease-in-out",
           "bg-gradient-to-b from-primary to-secondary",
           isOpen
-            ? "w-64 h-[85vh] top-[15vh]"
-            : "w-23 h-80 top-[15vh] rounded-br-[60px] rounded-tr-[60px]"
+            ? "w-64 h-[85vh] top-[15vh] translate-x-0"
+            : "w-23 h-80 top-[15vh] rounded-br-[60px] rounded-tr-[60px] -translate-x-full md:translate-x-0"
         )}
       >
         <div
@@ -234,6 +259,15 @@ export function Sidebar({ className, onToggle }) {
           </nav>
         </div>
       </div>
+
+      {/* Overlay (mobile only) */}
+      <div
+        className={cn(
+          "fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 md:hidden",
+          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        )}
+        onClick={handleToggle}
+      />
     </div>
   );
 }

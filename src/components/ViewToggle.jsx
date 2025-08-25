@@ -1,10 +1,16 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { Grid3X3, List } from "lucide-react";
 
-export function ViewToggle({ isExpanded, setIsExpanded }) {
+export function ViewToggle({ isExpanded, setIsExpanded, className }) {
   return (
-    <div className="relative inline-flex bg-gradient-to-r from-[#123456] to-[#4863A0] p-1 rounded-full">
+    <div
+      className={cn(
+        "relative inline-flex bg-gradient-to-r from-[#123456] to-[#4863A0] p-1 rounded-full",
+        className
+      )}
+    >
       {/* Sliding background indicator */}
       <div
         className={`absolute top-1 bottom-1 w-1/2 bg-white rounded-full transition-all duration-300 ease-out ${

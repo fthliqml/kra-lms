@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 const SearchInput = ({ className }) => {
   return (
-    <div className="relative w-[250px] h-10">
+    <div className={cn("relative h-10 w-full", className)}>
       {/* Icon */}
       <Search className="absolute left-3 top-5 -translate-y-[45%] text-gray-500 w-4 h-4 pointer-events-none" />
 

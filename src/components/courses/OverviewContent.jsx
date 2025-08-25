@@ -15,7 +15,7 @@ export default function OverviewContent() {
     <div
       className={cn(
         "flex-1 pt-10 pb-5 transition-all duration-500 ease-in-out",
-        isOpen ? "pl-72" : "pl-36"
+        isOpen ? "md:pl-72" : "md:pl-36"
       )}
     >
       <div className="space-y-8">
