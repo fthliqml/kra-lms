@@ -1,12 +1,13 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar1 } from "lucide-react";
 import Image from "next/image";
 import CalendarView from "@/components/CalendarView";
 import CourseCard from "@/components/courses/CourseCard";
 import EventCard from "@/components/EventCard";
 import { useSidebar } from "@/context/SidebarContext";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 export default function DashboardContent() {
   const { isOpen } = useSidebar();
@@ -14,7 +15,7 @@ export default function DashboardContent() {
     <div
       className={cn(
         "flex gap-15 transition-all duration-500 ease-in-out w-full",
-        isOpen ? "pl-72" : "pl-36"
+        isOpen ? "pl-72" : "pl-32"
       )}
     >
       <div className="flex flex-col gap-20 flex-[1.5]">
@@ -57,7 +58,12 @@ export default function DashboardContent() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-13 w-full flex-1">
+      <div className="flex flex-col gap-13 w-full flex-1 relative">
+        <div className="fixed top-20 right-0">
+          <Button variant={"ghost"} size={"xl"}>
+            <Calendar1 className="w-5 h-5 text-primary" />
+          </Button>
+        </div>
         <CalendarView className="bg-[#F6F6F6] shadow-all h-fit" />
 
         <div className="flex flex-col gap-2">

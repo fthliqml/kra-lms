@@ -12,13 +12,27 @@ const columns = [
   {
     key: "no",
     header: "No.",
+    className: "text-center font-semibold",
+    cellClassName: "text-center font-semibold",
+  },
+  { key: "trainingName", header: "Training", className: "w-[200px]" },
+  {
+    key: "groupComp",
+    header: "Group Comp",
     className: "text-center",
     cellClassName: "text-center",
   },
-  { key: "trainingName", header: "Training", className: "w-[200px]" },
-  { key: "groupComp", header: "Group Comp" },
-  { key: "date", header: "Date" },
-  { key: "instructor", header: "Instructor", className: "w-[200px]" },
+  {
+    key: "date",
+    header: "Date",
+    className: "text-center",
+    cellClassName: "text-center",
+  },
+  {
+    key: "instructor",
+    header: "Instructor",
+    className: "w-[200px] text-center",
+  },
   {
     key: "status",
     header: "Status",
@@ -43,23 +57,28 @@ export default function TrainingPage({ histories }) {
     <div
       className={cn(
         "flex-1 pb-5 w-full transition-all duration-500 ease-in-out",
-        isOpen ? "pl-72" : "pl-36"
+        isOpen ? "md:pl-72" : "md:pl-32"
       )}
     >
-      <div className="w-full flex justify-between items-center mb-15">
+      <div className="w-full flex justify-between items-center mb-5 md:mb-15 flex-col md:flex-row gap-5">
         <h1 className="text-primary text-4xl font-bold">Training History</h1>
         <div className="flex gap-2">
-          <FilterDropdown content={["All", "Inhouse", "Outhouse", "K-Learn"]} />
-          <SearchInput />
+          <FilterDropdown
+            content={["All", "Inhouse", "Outhouse", "K-Learn"]}
+            className={"order-2 md:order-1"}
+          />
+          <SearchInput className={"order-1 md:order-2"} />
         </div>
       </div>
 
-      <div className="rounded-lg border border-gray-200 shadow-all p-3">
+      <div className="rounded-lg border border-gray-200 shadow-all p-2">
         <DataTable columns={columns} rows={histories} />
       </div>
 
-      <div className="flex items-center justify-between w-full mt-5">
-        <p className=" text-[#9e9e9e]">Showing 1-10 of 50 results</p>
+      <div className="flex items-center justify-between w-full mt-5 flex-col md:flex-row gap-4 md:gap-0">
+        <p className=" text-[#9e9e9e] text-sm md:text-base">
+          Showing 1-10 of 50 results
+        </p>
         <MyPagination />
       </div>
     </div>

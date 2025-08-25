@@ -9,8 +9,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { FilterIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-const FilterDropdown = ({ content = [] }) => {
+const FilterDropdown = ({ content = [], className }) => {
   const [filter, setFilter] = useState("All");
 
   return (
@@ -18,7 +19,10 @@ const FilterDropdown = ({ content = [] }) => {
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="text-primary rounded-full shadow-all cursor-pointer gap-2"
+          className={cn(
+            "text-primary rounded-full shadow-all cursor-pointer gap-2",
+            className
+          )}
           size="xl"
         >
           {filter}
