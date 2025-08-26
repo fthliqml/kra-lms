@@ -42,6 +42,7 @@ const menuItems = [
     icon: FileText,
     href: "/survey",
     submenu: [
+      { label: "Survey 1", href: "/survey/1" },
       { label: "Create Survey", href: "/survey/create" },
       { label: "My Surveys", href: "/survey/my" },
       { label: "Results", href: "/survey/results" },
@@ -108,7 +109,7 @@ export function Sidebar({ className, onToggle }) {
 
   return (
     <div className={cn("relative flex", className)}>
-      <div className="fixed top-10 left-6 z-50 flex items-center gap-4">
+      <div className="fixed top-10 left-[18px] z-50 flex items-center gap-4">
         {/* Menu Toggle Button */}
         <button
           onClick={handleToggle}
