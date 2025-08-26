@@ -158,7 +158,7 @@ export default function CalendarView({ className, ...props }) {
               key={index}
               onClick={() => setSelectedDate(day.fullDate)}
               className={cn(
-                "relative h-10 w-10 text-sm font-normal rounded-md transition-colors hover:bg-gray-200 flex justify-center items-center",
+                "relative h-10 w-10 text-sm font-normal rounded-md transition-colors hover:bg-gray-200 flex justify-center items-center cursor-pointer",
                 !day.isCurrentMonth && "text-gray-400",
                 isToday(day.fullDate) &&
                   "bg-[#4F6FBD] text-white hover:bg-[#4F6FBD] rounded-full"

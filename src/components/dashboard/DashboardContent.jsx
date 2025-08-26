@@ -1,24 +1,34 @@
 "use client";
 
-import { ArrowRight, Calendar1 } from "lucide-react";
+import { ArrowRight, CalendarClock } from "lucide-react";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
+import { useSidebar } from "@/context/SidebarContext";
 import CalendarView from "@/components/CalendarView";
 import CourseCard from "@/components/courses/CourseCard";
 import EventCard from "@/components/EventCard";
-import { useSidebar } from "@/context/SidebarContext";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export default function DashboardContent() {
   const { isOpen } = useSidebar();
+  const isMdUp = useMediaQuery("(min-width: 768px)");
+  const isXlUp = useMediaQuery("(min-width: 1280px)");
   return (
     <div
       className={cn(
-        "flex gap-15 transition-all duration-500 ease-in-out w-full",
-        isOpen ? "pl-72" : "pl-32"
+        "xl:flex gap-15 transition-all duration-500 ease-in-out w-full space-y-10 pb-6 xl:pb-0",
+        isOpen ? "md:pl-72" : "md:pl-32"
       )}
     >
-      <div className="flex flex-col gap-20 flex-[1.5]">
+      <div className="flex flex-col gap-10 xl:gap-20 flex-[1.5]">
         <div className="flex flex-col gap-7">
           <h1 className="text-primary text-4xl font-bold">Home</h1>
           <div className="relative shadow-all mt-5 w-full bg-gradient-to-r from-primary to-tetriary text-white px-6 py-6 rounded-[25px] overflow-visible">
@@ -35,7 +45,7 @@ export default function DashboardContent() {
               <Image
                 src="/images/female-reading.png"
                 alt="image"
-                className="absolute right-0 -translate-y-30 sm:-translate-y-45 lg:-translate-y-50 h-auto w-auto"
+                className="absolute right-0 -translate-y-45 translate-x-10 sm:translate-x-0 lg:-translate-y-50 h-auto w-auto"
                 width={150}
                 height={150}
                 priority
@@ -52,19 +62,33 @@ export default function DashboardContent() {
             </button>
           </div>
           <div className="flex flex-col gap-3">
-            <CourseCard />
-            <CourseCard />
+            <CourseCard isExpanded={isMdUp} />
+            <CourseCard isExpanded={isMdUp} />
           </div>
         </div>
       </div>
 
       <div className="flex flex-col gap-13 w-full flex-1 relative">
-        <div className="fixed top-20 right-0">
-          <Button variant={"ghost"} size={"xl"}>
-            <Calendar1 className="w-5 h-5 text-primary" />
-          </Button>
-        </div>
-        <CalendarView className="bg-[#F6F6F6] shadow-all h-fit" />
+        {!isXlUp && (
+          <Dialog>
+            <DialogTrigger asChild>
+              <button className="fixed top-20 right-0 bg-primary rounded-none rounded-l-full opacity-50 hover:opacity-100 py-3 pr-3 pl-5 cursor-pointer">
+                <CalendarClock className="size-7 text-white" />
+              </button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>My Schedule</DialogTitle>
+                <DialogDescription>
+                  Click on date to see the details.
+                </DialogDescription>
+              </DialogHeader>
+              <CalendarView className="bg-[#F6F6F6] shadow-all h-fit" />
+            </DialogContent>
+          </Dialog>
+        )}
+
+        <CalendarView className="bg-[#F6F6F6] shadow-all h-fit hidden xl:block" />
 
         <div className="flex flex-col gap-2">
           <h2 className="text-primary text-2xl font-bold">Schedule</h2>
