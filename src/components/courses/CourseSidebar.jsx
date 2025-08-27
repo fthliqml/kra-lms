@@ -55,7 +55,7 @@ export default function CourseSidebar() {
       <div
         className={cn(
           "transition-all duration-300 ease-in-out",
-          isOpen ? "w-80" : "w-0"
+          isOpen ? "md:w-80" : "w-0"
         )}
       >
         {/* Sidebar */}

@@ -17,7 +17,7 @@ const QuestionCard = ({ number, question, type = "essay", options = [] }) => {
       {type == "essay" ? (
         <Textarea
           placeholder="Type your answer here."
-          className="border-2 border-gray-300 w-full max-w-[70rem] h-30"
+          className="border-2 border-gray-300 w-full max-w-[70rem] h-30 text-sm md:text-base"
           maxLength={300}
         />
       ) : (
@@ -36,7 +36,10 @@ const QuestionCard = ({ number, question, type = "essay", options = [] }) => {
               onClick={() => setValue(i + 1)}
             >
               <RadioGroupItem value={i + 1} id={opt} />
-              <Label htmlFor={opt} className="text-gray-700 cursor-pointer">
+              <Label
+                htmlFor={opt}
+                className="text-gray-700 cursor-pointer text-sm md:text-base"
+              >
                 {opt}
               </Label>
             </div>

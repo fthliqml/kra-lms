@@ -16,6 +16,8 @@ const columns = [
   {
     key: "competency",
     header: "Competency",
+    className: "py-3",
+    cellClassName: "py-3",
   },
   {
     key: "date",
