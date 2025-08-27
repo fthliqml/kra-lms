@@ -1,7 +1,9 @@
 "use client";
 
 import { ArrowRight, CalendarClock } from "lucide-react";
+import Link from "next/link";
 import Image from "next/image";
+
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
 import { useSidebar } from "@/context/SidebarContext";
@@ -57,9 +59,9 @@ export default function DashboardContent() {
         <div className="flex flex-col gap-2">
           <div className="flex justify-between items-center">
             <h2 className="text-primary text-2xl font-bold">My Courses</h2>
-            <button className="text-gray-800 cursor-pointer">
+            <Link href={"/courses"} className="text-gray-800 cursor-pointer">
               View More <ArrowRight className="inline w-5 h-5" />
-            </button>
+            </Link>
           </div>
           <div className="flex flex-col gap-3">
             <CourseCard isExpanded={isMdUp} />
