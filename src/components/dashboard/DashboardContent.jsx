@@ -68,7 +68,7 @@ export default function DashboardContent() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-13 w-full flex-1 relative">
+      <div className="flex flex-col gap-10 w-full flex-1 relative">
         {!isXlUp && (
           <Dialog>
             <DialogTrigger asChild>

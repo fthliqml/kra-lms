@@ -43,9 +43,8 @@ const menuItems = [
     href: "/survey",
     submenu: [
       { label: "Survey 1", href: "/survey/1" },
-      { label: "Create Survey", href: "/survey/create" },
-      { label: "My Surveys", href: "/survey/my" },
-      { label: "Results", href: "/survey/results" },
+      { label: "Survey 2", href: "/survey/2" },
+      { label: "Survey 3", href: "/survey/3" },
     ],
   },
   {
