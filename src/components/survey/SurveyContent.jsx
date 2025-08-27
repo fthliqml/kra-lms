@@ -45,6 +45,8 @@ export default function SurveyContent({ trainings, params }) {
       render: (_, row) => {
         return row.status === "Completed" ? (
           <ActionButton
+            as="link"
+            href={`${surveyId}/detail/${row.id}`}
             icon={<Eye className="size-5 stroke-white" />}
             tooltip="Detail"
             color="bg-info"
@@ -53,7 +55,7 @@ export default function SurveyContent({ trainings, params }) {
         ) : (
           <ActionButton
             as="link"
-            href={`${surveyId}/fill/${row.id}`}
+            href={`${surveyId}/detail/${row.id}`}
             icon={<ClipboardCheck className="size-5 stroke-white" />}
             tooltip="Take Survey"
             color="bg-secondary"
@@ -71,14 +73,18 @@ export default function SurveyContent({ trainings, params }) {
         isOpen ? "md:pl-72" : "md:pl-32"
       )}
     >
-      <div className="w-full flex justify-between items-center mb-5 md:mb-15 flex-col md:flex-row gap-5">
-        <h1 className="text-primary text-4xl font-bold">Survey {surveyId}</h1>
-        <div className="flex gap-2">
+      <div className="w-full flex justify-between items-center mb-5 md:mb-10 flex-col md:flex-row gap-10 md:gap-5">
+        <h1 className="text-primary text-4xl font-bold w-[300px] text-center md:text-start">
+          Survey {surveyId}
+        </h1>
+        <div className="flex gap-2 w-full justify-between md:justify-end">
           <FilterDropdown
             content={["All", "Inhouse", "Outhouse", "K-Learn"]}
             className={"order-2 md:order-1"}
           />
-          <SearchInput className={"order-1 md:order-2"} />
+          <SearchInput
+            className={"order-1 md:order-2 md:w-[200px] max-w-[300px]"}
+          />
         </div>
       </div>
 

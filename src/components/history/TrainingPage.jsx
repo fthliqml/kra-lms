@@ -61,14 +61,18 @@ export default function TrainingPage({ histories }) {
         isOpen ? "md:pl-72" : "md:pl-32"
       )}
     >
-      <div className="w-full flex justify-between items-center mb-5 md:mb-15 flex-col md:flex-row gap-5">
-        <h1 className="text-primary text-4xl font-bold">Training History</h1>
-        <div className="flex gap-2">
+      <div className="w-full flex justify-between items-center mb-5 md:mb-10 flex-col md:flex-row gap-10 md:gap-5">
+        <h1 className="text-primary text-4xl font-bold max-w-[500px] w-full md:w-[500px] text-center md:text-start">
+          Training History
+        </h1>
+        <div className="flex gap-2 w-full justify-between md:justify-end">
           <FilterDropdown
             content={["All", "Inhouse", "Outhouse", "K-Learn"]}
             className={"order-2 md:order-1"}
           />
-          <SearchInput className={"order-1 md:order-2"} />
+          <SearchInput
+            className={"order-1 md:order-2 md:w-[300px] max-w-[300px]"}
+          />
         </div>
       </div>
 

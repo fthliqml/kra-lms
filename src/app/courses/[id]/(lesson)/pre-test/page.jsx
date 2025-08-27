@@ -1,4 +1,4 @@
-import QuestionCard from "@/components/courses/QuestionCard";
+import QuestionCard from "@/components/QuestionCard";
 import { Button } from "@/components/ui/button";
 
 export default function page() {
