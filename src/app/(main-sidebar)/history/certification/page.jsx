@@ -41,36 +41,6 @@ const certifications = [
     date: "2025-03-09",
     status: "In Progress",
   },
-  {
-    no: 11,
-    competency: "Negotiation",
-    date: "2025-03-16",
-    status: "Completed",
-  },
-  {
-    no: 12,
-    competency: "Emotional Intelligence",
-    date: "2025-03-23",
-    status: "Pending",
-  },
-  {
-    no: 13,
-    competency: "Analytical Thinking",
-    date: "2025-03-30",
-    status: "Completed",
-  },
-  {
-    no: 14,
-    competency: "Collaboration",
-    date: "2025-04-06",
-    status: "Completed",
-  },
-  {
-    no: 15,
-    competency: "Project Management",
-    date: "2025-04-13",
-    status: "Pending",
-  },
 ];
 
 export default function page() {

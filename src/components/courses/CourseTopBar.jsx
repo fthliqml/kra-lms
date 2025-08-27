@@ -11,14 +11,12 @@ export default function CourseTopBar() {
   return (
     <div className="bg-primary text-white px-6 py-4 flex items-center justify-between shadow-lg fixed top-0 w-full z-20">
       <div className="flex items-center space-x-4">
-        <h1 className="text-lg font-semibold">
-          Master JavaScript From Beginner to Advanced
-        </h1>
+        <h1 className="text-lg font-semibold">Master JavaScript</h1>
       </div>
       <Button
         variant="ghost"
         size="sm"
-        className="text-white hover:bg-gray-200 p-2 cursor-pointer"
+        className="text-white hover:bg-gray-200 p-2 cursor-pointer hidden md:flex"
         onClick={() => {
           router.push(`/courses`);
         }}

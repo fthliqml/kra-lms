@@ -19,8 +19,8 @@ const columns = [
   {
     key: "groupComp",
     header: "Group Comp",
-    className: "text-center py-3",
-    cellClassName: "text-center py-3",
+    className: "text-center py-4",
+    cellClassName: "text-center py-4",
   },
   {
     key: "date",

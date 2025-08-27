@@ -1,25 +1,33 @@
 "use client";
 
 import React from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen, Calendar, User } from "lucide-react";
 
 import { cn, formatRangeDate } from "@/lib/utils";
 import { useSidebar } from "@/context/SidebarContext";
-import InfoGrid from "@/components/InfoGrid";
 import QuestionCard from "@/components/QuestionCard";
 import { Button } from "@/components/ui/button";
+import InfoDetailSurvey from "./InfoDetailSurvey";
 
 export default function SurveyFillContent({ data, params }) {
   const { isOpen } = useSidebar();
-
   const { surveyId } = React.use(params);
 
   const formData = [
-    { label: "Nama Training", value: data.trainingName },
-    { label: "Nama Instruktur", value: data.instructor },
+    {
+      label: "Nama Training",
+      value: data.trainingName,
+      icon: <BookOpen size={18} className="text-muted-foreground" />,
+    },
+    {
+      label: "Nama Instruktur",
+      value: data.instructor,
+      icon: <User size={18} className="text-muted-foreground" />,
+    },
     {
       label: "Tanggal Pelaksanaan",
       value: formatRangeDate(data.date.startDate, data.date.endDate),
+      icon: <Calendar size={18} className="text-muted-foreground" />,
     },
   ];
 
@@ -30,17 +38,13 @@ export default function SurveyFillContent({ data, params }) {
         isOpen ? "md:pl-72" : "md:pl-32"
       )}
     >
-      <div className="w-full flex justify-between items-center mb-5 md:mb-15 flex-col md:flex-row gap-5">
+      <div className="w-full mb-5 md:mb-15 gap-5">
         <h1 className="text-primary text-4xl font-bold">Survey {surveyId}</h1>
       </div>
 
-      <InfoGrid
-        items={formData}
-        colTemplate="220px 1fr"
-        className="shadow-all p-5 rounded mb-10"
-      />
+      <InfoDetailSurvey items={formData} />
 
-      <div className="px-20 py-10 shadow-all">
+      <div className="flex flex-col gap-5 px-5 sm:px-15 py-5 sm:py-10 rounded-lg">
         {data.questions.map((item, i) => (
           <QuestionCard
             key={i + 1}
