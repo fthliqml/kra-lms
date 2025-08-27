@@ -1,12 +1,12 @@
 "use client";
 
+import Link from "next/link";
+import { cn, formatRangeDate } from "@/lib/utils";
 import FilterDropdown from "@/components/FilterDropdown";
 import { MyPagination } from "@/components/MyPagination";
 import SearchInput from "@/components/SearchInput";
 import { useSidebar } from "@/context/SidebarContext";
-import { cn } from "@/lib/utils";
 import { DataTable } from "@/components/DataTable";
-import Link from "next/link";
 
 const columns = [
   {
@@ -27,6 +27,7 @@ const columns = [
     header: "Date",
     className: "text-center",
     cellClassName: "text-center",
+    render: (_, row) => <p>{formatRangeDate(row.startDate, row.endDate)}</p>,
   },
   {
     key: "instructor",

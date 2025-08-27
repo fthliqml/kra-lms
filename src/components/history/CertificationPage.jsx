@@ -1,10 +1,10 @@
 "use client";
 
+import { cn, formatFullDate } from "@/lib/utils";
 import { useSidebar } from "@/context/SidebarContext";
 import SearchInput from "@/components/SearchInput";
 import { DataTable } from "@/components/DataTable";
 import { MyPagination } from "@/components/MyPagination";
-import { cn } from "@/lib/utils";
 
 const columns = [
   {
@@ -22,6 +22,7 @@ const columns = [
     header: "Date",
     className: "text-center",
     cellClassName: "text-center",
+    render: (value) => <p>{formatFullDate(value)}</p>,
   },
   {
     key: "status",

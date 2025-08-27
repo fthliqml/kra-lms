@@ -203,7 +203,11 @@ export function Sidebar({ className, onToggle }) {
                           />
                         </div>
                       </TooltipTrigger>
-                      <TooltipContent side="right">
+                      <TooltipContent
+                        side="right"
+                        arrowClassName={"bg-primary fill-primary"}
+                        sideOffset={30}
+                      >
                         <p>{item.label}</p>
                       </TooltipContent>
                     </Tooltip>

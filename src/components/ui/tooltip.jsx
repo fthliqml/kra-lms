@@ -27,7 +27,13 @@ function TooltipTrigger({ ...props }) {
   return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />;
 }
 
-function TooltipContent({ className, sideOffset = 0, children, ...props }) {
+function TooltipContent({
+  className,
+  sideOffset = 0,
+  children,
+  arrowClassName,
+  ...props
+}) {
   return (
     <TooltipPrimitive.Portal>
       <TooltipPrimitive.Content
@@ -40,7 +46,9 @@ function TooltipContent({ className, sideOffset = 0, children, ...props }) {
         {...props}
       >
         {children}
-        <TooltipPrimitive.Arrow className="bg-primary fill-primary z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]" />
+        <TooltipPrimitive.Arrow
+          className={`z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px] ${arrowClassName}`}
+        />
       </TooltipPrimitive.Content>
     </TooltipPrimitive.Portal>
   );
