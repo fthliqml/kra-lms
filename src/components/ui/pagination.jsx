@@ -46,7 +46,7 @@ function PaginationLink({ className, isActive, size = "icon", ...props }) {
           size,
         }),
         isActive
-          ? "bg-gradient-to-b from-[#4863A0] to-tetriary text-white hover:text-white"
+          ? "bg-gradient-to-b from-secondary to-tetriary text-white hover:text-white"
           : "hover:border border-primary",
         className
       )}

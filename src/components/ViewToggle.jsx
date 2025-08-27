@@ -7,7 +7,7 @@ export function ViewToggle({ isExpanded, setIsExpanded, className }) {
   return (
     <div
       className={cn(
-        "relative inline-flex bg-gradient-to-r from-[#123456] to-[#4863A0] p-1 rounded-full",
+        "relative inline-flex bg-gradient-to-r from-[#123456] to-secondary p-1 rounded-full",
         className
       )}
     >

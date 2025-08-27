@@ -1,43 +1,23 @@
+import InfoGrid from "@/components/InfoGrid";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 export default function page() {
   const isPassed = true;
+
+  const data = [
+    { label: "Nama", value: "Surya" },
+    { label: "Waktu Pengerjaan", value: "2 Jam" },
+    { label: "Jumlah Soal", value: 5 },
+    { label: "Jawaban Benar", value: 3 },
+    { label: "Skor Akhir", value: 60 },
+    { label: "Status", value: isPassed ? "Lulus" : "Tidak Lulus" },
+  ];
+
   return (
     <div className="container mx-auto flex flex-col mt-30 h-full">
       <div className="max-w-md p-6">
-        <div className="grid grid-cols-2 gap-y-3 gap-x-0 text-gray-800 text-lg">
-          <p>Nama</p>
-          <p>
-            <span className="mr-3">:</span> Surya
-          </p>
-
-          <p>Waktu Pengerjaan</p>
-          <p>
-            <span className="mr-3">:</span> 2 Jam
-          </p>
-
-          <p>Jumlah Soal</p>
-          <p>
-            <span className="mr-3">:</span> 5
-          </p>
-
-          <p>Jawaban Benar</p>
-          <p>
-            <span className="mr-3">:</span> 3
-          </p>
-
-          <p>Skor Akhir</p>
-          <p>
-            <span className="mr-3">:</span> 60
-          </p>
-
-          <p>Status</p>
-          <p>
-            <span className="mr-4">:</span>
-            {isPassed ? "Lulus" : "Tidak Lulus"}
-          </p>
-        </div>
+        <InfoGrid items={data} colTemplate="180px 1fr" />
       </div>
 
       <div className="max-w-4xl mt-20 p-6">

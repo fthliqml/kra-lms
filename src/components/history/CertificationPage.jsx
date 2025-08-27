@@ -1,10 +1,10 @@
 "use client";
 
+import { cn, formatFullDate } from "@/lib/utils";
 import { useSidebar } from "@/context/SidebarContext";
 import SearchInput from "@/components/SearchInput";
 import { DataTable } from "@/components/DataTable";
 import { MyPagination } from "@/components/MyPagination";
-import { cn } from "@/lib/utils";
 
 const columns = [
   {
@@ -22,6 +22,7 @@ const columns = [
     header: "Date",
     className: "text-center",
     cellClassName: "text-center",
+    render: (value) => <p>{formatFullDate(value)}</p>,
   },
   {
     key: "status",
@@ -41,12 +42,12 @@ export default function CertificationPage({ certifications }) {
         isOpen ? "md:pl-72" : "md:pl-32"
       )}
     >
-      <div className="w-full flex justify-between items-center mb-5 md:mb-15 flex-col md:flex-row gap-5">
-        <h1 className="text-primary text-4xl font-bold">
+      <div className="w-full flex justify-between items-center mb-5 md:mb-10 flex-col md:flex-row gap-10 md:gap-5">
+        <h1 className="text-primary text-4xl font-bold max-w-[500px] w-full md:w-[800px] text-center md:text-start">
           Certification History
         </h1>
-        <div className="flex gap-2 w-full md:w-[250px]">
-          <SearchInput className={"w-[15rem] md:w-full"} />
+        <div className="flex gap-2 w-full justify-between md:justify-end">
+          <SearchInput className={"md:w-[300px] max-w-[300px]"} />
         </div>
       </div>
 
