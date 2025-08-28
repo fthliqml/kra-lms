@@ -2,39 +2,58 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ArrowLeft, Logs, X } from "lucide-react";
 
-import { cn, getLastPathSegment } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { ProgressRadioItem, RadioGroup } from "@/components/ui/radio-group";
 import {
-  ProgressRadioItem,
-  RadioGroup,
-  RadioGroupItem,
-} from "@/components/ui/radio-group";
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Label } from "@/components/ui/label";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
-export default function CourseSidebar() {
+export default function CourseSidebar({ course = {} }) {
   const [isOpen, setIsOpen] = useState(true);
-  const [modules, setModules] = useState([
-    { href: "pre-test", label: "Pretest", done: true },
-    {
-      href: "document",
-      label: "Learning Module",
+  const pathname = usePathname();
+
+  const [menus, setMenus] = useState([
+    { href: `/courses/${course.id}/pre-test`, label: "Pretest", done: true },
+    ...course.modules.map((mod) => ({
+      label: mod.title,
       done: false,
       submenu: [
-        { href: "document", label: "Document", done: false },
-
-        { href: "video", label: "Video", done: false },
+        {
+          href: `/courses/${course.id}/modules/${mod.id}/document`,
+          label: "Document",
+          done: false,
+        },
+        {
+          href: `/courses/${course.id}/modules/${mod.id}/video`,
+          label: "Video",
+          done: false,
+        },
       ],
+    })),
+    ,
+    {
+      href: `/courses/${course.id}/post-test`,
+      label: "Post test",
+      done: false,
     },
-    { href: "post-test", label: "Post test", done: false },
-    { href: "result", label: "Result", done: false },
+    { href: `/courses/${course.id}/resume`, label: "Result", done: false },
   ]);
 
   const router = useRouter();
-  const pathname = usePathname();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -43,13 +62,24 @@ export default function CourseSidebar() {
   return (
     <>
       {!isOpen && (
-        <Button
-          onClick={toggleSidebar}
-          className="fixed rounded-l-none top-25 left-0 z-50 opacity-20 bg-primary hover:opacity-100 text-white shadow-lg rounded-r-full"
-          size="xl"
-        >
-          <Logs className="size-6" />
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              onClick={toggleSidebar}
+              className="fixed rounded-l-none top-25 left-0 z-50 opacity-20 bg-primary hover:opacity-100 text-white shadow-lg rounded-r-full"
+              size="xl"
+            >
+              <Logs className="size-6" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent
+            side="right"
+            arrowClassName={"bg-primary fill-primary"}
+            sideOffset={5}
+          >
+            <p>Menu Pembelajaran</p>
+          </TooltipContent>
+        </Tooltip>
       )}
 
       <div
@@ -97,66 +127,95 @@ export default function CourseSidebar() {
               </div>
 
               {/* Course Modules */}
-              <RadioGroup className="space-y-2">
-                {modules.map((module) => (
+              <RadioGroup>
+                {menus.map((menu) => (
                   <div
-                    key={module.href}
-                    className="flex flex-col border-b border-gray-200"
+                    key={menu.label}
+                    className={cn(
+                      "flex flex-col gap-2",
+                      !menu.submenu && "border-b border-gray-300"
+                    )}
                   >
                     {/* Parent Module */}
-                    <div className="flex items-center justify-between py-2">
-                      <Link href={module.href} className="flex-1">
-                        <Label
-                          htmlFor={module.href}
-                          className={cn(
-                            "text-gray-700 font-medium cursor-pointer",
-                            module.done &&
-                              "text-primary font-semibold translate-x-2"
-                          )}
-                        >
-                          {module.label}
-                        </Label>
-                      </Link>
-
-                      <ProgressRadioItem
-                        id={module.href}
-                        value={module.href}
-                        checked={module.done}
-                        readOnly
-                        className="border-gray-300"
-                      />
-                    </div>
-
-                    {module.submenu && (
-                      <div className="pl-4 space-y-2">
-                        {module.submenu.map((sub) => (
-                          <div
-                            key={sub.href}
-                            className="flex items-center justify-between border-b border-gray-200 py-2"
-                          >
-                            <Link href={sub.href} className="flex-1">
-                              <Label
-                                htmlFor={sub.href}
+                    <Accordion type="single" collapsible className="w-full">
+                      {menu.submenu ? (
+                        <AccordionItem value={menu.label}>
+                          <AccordionTrigger>
+                            <div className="flex items-center justify-between py-2">
+                              <p
                                 className={cn(
-                                  "text-gray-600 cursor-pointer",
-                                  sub.done &&
-                                    "text-primary font-semibold translate-x-2"
+                                  "text-gray-700 font-medium cursor-pointer",
+                                  menu.done && "text-primary font-semibold"
                                 )}
                               >
-                                {sub.label}
-                              </Label>
-                            </Link>
+                                {menu.label}
+                              </p>
+                            </div>
+                          </AccordionTrigger>
+
+                          {menu.submenu && (
+                            <AccordionContent className={"pb-0"}>
+                              <div className="pl-4 space-y-2 border-l border-gray-300">
+                                {menu.submenu.map((sub) => (
+                                  <div
+                                    key={sub.href}
+                                    className="flex items-center justify-between py-2"
+                                  >
+                                    <Link href={sub.href} className="flex-1">
+                                      <Label
+                                        htmlFor={sub.href}
+                                        className={cn(
+                                          "text-gray-600 cursor-pointer hover:underline",
+                                          sub.done &&
+                                            "text-primary font-semibold",
+                                          pathname === sub.href &&
+                                            "font-bold translate-x-2"
+                                        )}
+                                      >
+                                        {sub.label}
+                                      </Label>
+                                    </Link>
+                                    <ProgressRadioItem
+                                      id={sub.href}
+                                      value={sub.href}
+                                      checked={sub.done}
+                                      readOnly
+                                      className="border-gray-300"
+                                    />
+                                  </div>
+                                ))}
+                              </div>
+                            </AccordionContent>
+                          )}
+                        </AccordionItem>
+                      ) : (
+                        <div className="flex items-center justify-between py-2 pb-4">
+                          <Link href={menu.href} className="flex-1">
+                            <Label
+                              htmlFor={menu.href}
+                              className={cn(
+                                "text-gray-700 font-medium cursor-pointer",
+                                menu.done && "text-primary font-semibold",
+                                pathname === menu.href &&
+                                  "font-bold translate-x-2"
+                              )}
+                            >
+                              {menu.label}
+                            </Label>
+                          </Link>
+
+                          {!menu.submenu && (
                             <ProgressRadioItem
-                              id={sub.href}
-                              value={sub.href}
-                              checked={sub.done}
+                              id={menu.href}
+                              value={menu.href}
+                              checked={menu.done}
                               readOnly
                               className="border-gray-300"
                             />
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                          )}
+                        </div>
+                      )}
+                    </Accordion>
                   </div>
                 ))}
               </RadioGroup>
