@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, BookOpen, Calendar, User } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { cn, formatRangeDate } from "@/lib/utils";
 import { useSidebar } from "@/context/SidebarContext";
@@ -17,17 +17,14 @@ export default function SurveyFillContent({ data, params }) {
     {
       label: "Nama Training",
       value: data.trainingName,
-      icon: <BookOpen size={18} className="text-muted-foreground" />,
     },
     {
       label: "Nama Instruktur",
       value: data.instructor,
-      icon: <User size={18} className="text-muted-foreground" />,
     },
     {
       label: "Tanggal Pelaksanaan",
       value: formatRangeDate(data.date.startDate, data.date.endDate),
-      icon: <Calendar size={18} className="text-muted-foreground" />,
     },
   ];
 

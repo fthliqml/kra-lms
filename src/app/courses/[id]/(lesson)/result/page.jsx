@@ -1,22 +1,23 @@
-import { Clock, Trophy, RotateCcw, Eye, Target, BookOpen } from "lucide-react";
+import { Clock, Trophy, RotateCcw, Target, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import UserInfoCard from "@/components/courses/UserInfoCard";
 import StatusTestCard from "@/components/courses/StatusTestCard";
 import StatsCard from "@/components/courses/StatsCard";
-import MainScoreDisplay from "@/components/courses/MainScoreDisplay";
-import DetailedStats from "@/components/courses/DetailedStats";
+import MainResultCard from "@/components/courses/MainResultCard";
 
 const studentData = {
   name: "Surya Abdul Syukur",
+  status: "review",
   subject: "Master JavaScript",
   type: "Pretest",
   duration: "2 Jam",
   totalQuestions: 5,
   correctAnswers: 3,
   score: 60,
+  passingGrade: 75,
   completedAt: "22 Jan 2024",
-  isPassed: true,
+  isPassed: false,
+  isPendingReview: true,
 };
 
 export default function Page() {
@@ -34,16 +35,31 @@ export default function Page() {
             completedAt={studentData.completedAt}
             isFinal={false}
             isPassed={studentData.isPassed}
+            isPendingReview={studentData.isPendingReview}
           />
 
           {/* Quick Stats - Mobile only */}
           <div className="grid grid-cols-2 gap-4 lg:hidden">
-            <StatsCard
-              icon={<Target className="h-6 w-6 text-orange-600 mx-auto mb-2" />}
-              label={"Akurasi"}
-              value={percentage + "%"}
-              type="mobile"
-            />
+            {studentData.isPendingReview ? (
+              <StatsCard
+                icon={
+                  <BookOpen className="h-6 w-6 text-orange-600 mx-auto mb-2" />
+                }
+                label={"Jumlah Soal"}
+                value={studentData.totalQuestions + " Soal"}
+                type="mobile"
+              />
+            ) : (
+              <StatsCard
+                icon={
+                  <Target className="h-6 w-6 text-orange-600 mx-auto mb-2" />
+                }
+                label={"Passing Grade"}
+                value={studentData.passingGrade}
+                type="mobile"
+              />
+            )}
+
             <StatsCard
               icon={<Clock className="h-6 w-6 text-primary mx-auto mb-2" />}
               label={"Durasi"}
@@ -55,40 +71,38 @@ export default function Page() {
 
         {/* Middle Column - Score and Progress */}
         <div className="lg:col-span-5 space-y-6">
-          {/* Score Card */}
-          <Card className="shadow-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-card-foreground text-lg md:text-xl">
-                <BookOpen className="h-5 w-5 md:h-6 md:w-6 text-primary" />
-                Hasil Test
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {/* Main Score Display */}
-              <MainScoreDisplay
-                percentage={percentage}
-                score={studentData.score}
-              />
-
-              {/* Detailed Stats */}
-              <DetailedStats
-                correctAnswers={studentData.correctAnswers}
-                percentage={percentage}
-                totalQuestions={studentData.totalQuestions}
-              />
-            </CardContent>
-          </Card>
+          <MainResultCard
+            percentage={percentage}
+            score={studentData.score}
+            totalQuestions={studentData.totalQuestions}
+            correctAnswers={studentData.correctAnswers}
+            isPendingReview={studentData.isPendingReview}
+            completedAt={studentData.completedAt}
+          />
         </div>
 
         {/* Right Column - Additional Stats and Actions */}
         <div className="lg:col-span-3 space-y-6">
           {/* Additional Stats - Desktop only */}
           <div className="hidden lg:block space-y-4">
-            <StatsCard
-              icon={<Target className="h-8 w-8 text-orange-600 mx-auto mb-2" />}
-              label={"Akurasi"}
-              value={percentage + "%"}
-            />
+            {studentData.isPendingReview ? (
+              <StatsCard
+                icon={
+                  <BookOpen className="h-8 w-8 text-orange-600 mx-auto mb-2" />
+                }
+                label={"Jumlah Soal"}
+                value={studentData.totalQuestions + " Soal"}
+              />
+            ) : (
+              <StatsCard
+                icon={
+                  <Target className="h-8 w-8 text-orange-600 mx-auto mb-2" />
+                }
+                label={"Passing Grade"}
+                value={studentData.passingGrade}
+              />
+            )}
+
             <StatsCard
               icon={<Clock className="h-8 w-8 text-primary mx-auto mb-2" />}
               label={"Durasi"}
@@ -98,9 +112,23 @@ export default function Page() {
 
           {/* Action Buttons */}
           <div className="space-y-3">
-            <Button className="w-full" size="lg" variant={"primary"}>
-              <Trophy className="h-4 w-4 mr-2" />
-              Lanjut
+            <Button
+              className="w-full"
+              size="lg"
+              variant={"primary"}
+              disabled={studentData.isPendingReview}
+            >
+              {studentData.isPendingReview ? (
+                <>
+                  <Clock className="h-4 w-4 mr-2" />
+                  Menunggu Review
+                </>
+              ) : (
+                <>
+                  <Trophy className="h-4 w-4 mr-2" />
+                  Lanjut
+                </>
+              )}
             </Button>
 
             <Button

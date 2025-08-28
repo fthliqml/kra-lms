@@ -1,19 +1,6 @@
-import {
-  ArrowLeft,
-  Clock,
-  CheckCircle,
-  Trophy,
-  RotateCcw,
-  Eye,
-  TrendingUp,
-  Award,
-  Target,
-  BarChart3,
-} from "lucide-react";
+import { Clock, Trophy, RotateCcw, Target, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import TestResult from "@/components/courses/TestResult";
 import ImprovementIndicator from "@/components/courses/ImprovementIndicator";
 import UserInfoCard from "@/components/courses/UserInfoCard";
@@ -28,6 +15,7 @@ export default function ComprehensiveResultsPage() {
       duration: "1.5 Jam",
       totalQuestions: 10,
       correctAnswers: 4,
+      passingGrade: 75,
       score: 40,
       status: "Tidak Lulus",
       completedAt: "15 Jan 2024",
@@ -37,6 +25,7 @@ export default function ComprehensiveResultsPage() {
       totalQuestions: 10,
       correctAnswers: 8,
       score: 80,
+      passingGrade: 75,
       status: "Lulus",
       completedAt: "22 Jan 2024",
     },
@@ -79,8 +68,8 @@ export default function ComprehensiveResultsPage() {
                 icon={
                   <Target className="h-6 w-6 text-orange-600 mx-auto mb-2" />
                 }
-                label={"Akurasi"}
-                value={posttestPercentage + "%"}
+                label={"Passing Grade"}
+                value={studentData.posttest.passingGrade}
               />
               <StatsCard
                 icon={<Clock className="h-6 w-6 text-primary mx-auto mb-2" />}
@@ -137,8 +126,8 @@ export default function ComprehensiveResultsPage() {
                 icon={
                   <Target className="h-8 w-8 text-orange-600 mx-auto mb-2" />
                 }
-                label={"Akurasi"}
-                value={posttestPercentage + "%"}
+                label={"Passing Grade"}
+                value={studentData.posttest.passingGrade}
               />
               <StatsCard
                 icon={<Clock className="h-8 w-8 text-primary mx-auto mb-2" />}

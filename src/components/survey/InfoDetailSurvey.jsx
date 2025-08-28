@@ -13,7 +13,6 @@ const InfoDetailSurvey = ({ items }) => {
         isSmUp ? (
           <React.Fragment key={i}>
             <div className="flex items-center gap-2">
-              {item.icon}
               <p className="font-semibold">
                 {item.label} {!isSmUp && ":"}
               </p>
@@ -25,7 +24,6 @@ const InfoDetailSurvey = ({ items }) => {
         ) : (
           <div key={i}>
             <div className="flex items-center gap-2 mb-1">
-              {item.icon}
               <p className="font-semibold">
                 {item.label} {!isSmUp && ":"}
               </p>
