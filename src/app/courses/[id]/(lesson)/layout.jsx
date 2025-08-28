@@ -53,7 +53,7 @@ const data = {
 
 export default function LessonLayout({ children }) {
   return (
-    <div className="flex">
+    <div className="flex bg-white">
       <CourseSidebar title={data.title} course={data} />
       <main className="flex-1 flex flex-col min-h-screen">
         <CourseTopBar />

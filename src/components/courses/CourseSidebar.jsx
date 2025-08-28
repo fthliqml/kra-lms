@@ -2,10 +2,10 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, Logs, X } from "lucide-react";
-
 import { cn } from "@/lib/utils";
+
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ProgressRadioItem, RadioGroup } from "@/components/ui/radio-group";
@@ -23,8 +23,12 @@ import {
 } from "@/components/ui/tooltip";
 
 export default function CourseSidebar({ course = {} }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname, setIsOpen]);
 
   const [menus, setMenus] = useState([
     { href: `/courses/${course.id}/pre-test`, label: "Pretest", done: true },
@@ -232,6 +236,15 @@ export default function CourseSidebar({ course = {} }) {
           </div>
         </div>
       </div>
+
+      {/* Overlay (mobile only) */}
+      <div
+        className={cn(
+          "fixed inset-0 bg-black/50 z-20 transition-opacity duration-300 md:hidden",
+          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        )}
+        onClick={() => setIsOpen(false)}
+      />
     </>
   );
 }

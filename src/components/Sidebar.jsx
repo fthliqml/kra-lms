@@ -59,6 +59,9 @@ export function Sidebar({ className, onToggle }) {
   const { isOpen, setIsOpen, toggleSidebar } = useSidebar();
   const [expandedMenus, setExpandedMenus] = useState([]);
 
+  const router = useRouter();
+  const pathname = usePathname();
+
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 767px)");
 
@@ -79,8 +82,10 @@ export function Sidebar({ className, onToggle }) {
     };
   }, [isOpen]);
 
-  const router = useRouter();
-  const pathname = usePathname();
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
   const firstSegment = "/" + (pathname.split("/")[1] || "");
 
   const toggleSubmenu = (itemId) => {

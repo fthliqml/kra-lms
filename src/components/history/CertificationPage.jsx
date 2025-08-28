@@ -49,7 +49,7 @@ export default function CertificationPage({ certifications }) {
           Certification History
         </h1>
         <div className="flex gap-2 w-full justify-between md:justify-end">
-          <SearchInput className={"md:w-[300px] max-w-[300px]"} />
+          <SearchInput className={"md:w-[300px] w-full"} />
         </div>
       </div>
 
