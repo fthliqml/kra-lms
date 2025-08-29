@@ -100,11 +100,13 @@ export default function DevelopmentPage({ developments, params }) {
 
 									<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
 										<SelectInput
+											id={"group-competency"}
 											className={"grid gap-3 col-span-1"}
 											labelTitle={"Group Competency"}
 											content={["BC", "BMC", "MDP"]}
 										/>
 										<SelectInput
+											id={"group-competency"}
 											className={"grid gap-3 col-span-1"}
 											labelTitle={"Competency"}
 											content={[
@@ -118,11 +120,13 @@ export default function DevelopmentPage({ developments, params }) {
 
 									<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
 										<SelectInput
+											id={"group-competency"}
 											className={"grid gap-3 col-span-1"}
 											labelTitle={"Group Competency"}
 											content={["BC", "BMC", "MDP"]}
 										/>
 										<SelectInput
+											id={"group-competency"}
 											className={"grid gap-3 col-span-1"}
 											labelTitle={"Competency"}
 											content={[
@@ -136,11 +140,13 @@ export default function DevelopmentPage({ developments, params }) {
 
 									<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
 										<SelectInput
+											id={"group-competency"}
 											className={"grid gap-3 col-span-1"}
 											labelTitle={"Group Competency"}
 											content={["BC", "BMC", "MDP"]}
 										/>
 										<SelectInput
+											id={"group-competency"}
 											className={"grid gap-3 col-span-1"}
 											labelTitle={"Competency"}
 											content={[
